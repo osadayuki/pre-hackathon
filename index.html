@@ -1,44 +1,118 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>セルフラブ・エール | 今日頑張ったあなたへ</title>
-        <!-- 爆速で見た目を整えるためにTailwind CSS（CDN）を読み込み -->
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-    <body class="bg-amber-50 min-h-screen flex items-center justify-center p-4">
-        <main
-            class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center border border-amber-100"
-        >
-            <!-- タイトルエリア -->
-            <div class="mb-6">
-                <span class="text-4xl">🌸</span>
-                <h1 class="text-2xl font-bold text-gray-800 mt-2">
-                    セルフラブ・エール
-                </h1>
-                <p class="text-sm text-gray-500 mt-1">
-                    世界で一番の味方は、いつだって自分。
-                </p>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>セルフラブ・エール | 今日頑張ったあなたへ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-amber-50 min-h-screen flex items-center justify-center p-4">
 
-            <!-- 名言表示エリア（最初は案内メッセージ） -->
-            <div
-                id="message-box"
-                class="bg-amber-50/60 p-6 rounded-xl my-6 border border-amber-200/50"
-            >
-                <p class="text-gray-700 text-base leading-relaxed">
-                    下のボタンを押して、今日すずさんに必要なメッセージを受け取りましょう。
-                </p>
-            </div>
+    <main class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center border border-amber-100">
+        <!-- タイトルエリア -->
+        <div class="mb-6">
+            <span class="text-4xl">🛎️</span>
+            <h1 class="text-2xl font-bold text-gray-800 mt-2">セルフラブ・エール</h1>
+            <p class="text-sm text-gray-500 mt-1">世界で一番の味方は、いつだって自分。</p>
+        </div>
 
-            <!-- アクションボタン -->
-            <button
-                id="get-btn"
-                class="w-full bg-rose-400 hover:bg-rose-500 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition duration-200 transform active:scale-95"
-            >
-                メッセージを受け取る
-            </button>
-        </main>
-    </body>
+        <!-- 名言表示エリア -->
+        <div id="message-box" class="bg-amber-50/60 p-6 rounded-xl my-6 border border-amber-200/50 min-h-[120px] flex flex-col justify-center items-center">
+            <p id="quote-text" class="text-gray-700 text-base leading-relaxed font-medium">
+                下のボタンを押して、今日あなたに必要なメッセージを受け取りましょう。
+            </p>
+            <p id="quote-author" class="text-xs text-rose-400 mt-2 font-bold hidden"></p>
+        </div>
+
+        <!-- アクションボタン -->
+        <button id="get-btn" class="w-full bg-rose-400 hover:bg-rose-500 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition duration-200 transform active:scale-95">
+            メッセージを受け取る ✨
+        </button>
+    </main>
+
+    <!-- ここからJavaScriptを追加！ -->
+    <script>
+        // 1. 自分を愛するための名言データ（配列）
+        const quotes = [
+            {
+                text: "あなたが自分自身を好きにならなければ、誰もあなたを好きになってくれない。",
+                author: "ルシーユ・ボール"
+            },
+            {
+                text: "今日一日、本当によく頑張ったね。世界で一番の味方は、いつだって自分だよ。",
+                author: "セルフラブ・ボイス"
+            },
+            {
+                text: "他人と比較して自分を責める必要はない。あなたはあなたであればいい。",
+                author: "エレノア・ルーズベルト"
+            },
+            {
+                text: "完璧じゃなくていい。失敗してもいい。生きているだけで、あなたは満点です。",
+                author: "ご自愛メッセージ"
+            },
+            {
+                text: "自分の価値を決めるのは自分自身。他人の評価に振り回される必要はありません。",
+                author: "ココ・シャネル"
+            },
+            // --- ここから10個追加 ---
+            {
+                text: "自分自身を愛することは、一生続くロマンスの始まりだ。",
+                author: "オスカー・ワイルド"
+            },
+            {
+                text: "あなたの同意なしに、誰もあなたに屈辱を与えることはできない。",
+                author: "エレノア・ルーズベルト"
+            },
+            {
+                text: "誰かの二番手になるくらいなら、自分自身の一番でありたい。",
+                author: "ジュディ・ガーランド"
+            },
+            {
+                text: "自分がどう思うか、それが一番重要だ。他人がどう思うかは関係ない。",
+                author: "ヴァージニア・ウルフ"
+            },
+            {
+                text: "あなたはあなたであればいい。自分らしくあること以上に素晴らしいことはない。",
+                author: "マリリン・モンロー"
+            },
+            {
+                text: "私は他人の思い通りの人間になるために生きているのではない。私の人生は私のものだ。",
+                author: "ブルース・リー"
+            },
+            {
+                text: "欠点こそが、あなたをユニークで美しい存在にしている。",
+                author: "レディー・ガガ"
+            },
+            {
+                text: "自分自身を信頼しなさい。そうすれば、どのように生きていくべきかが見えてくる。",
+                author: "ゲーテ"
+            },
+            {
+                text: "他人の意見というノイズに、自分の内なる声をかき消されてはならない。",
+                author: "スティーブ・ジョブズ"
+            },
+            {
+                text: "あなたの許可なしに、誰もあなたを傷つけることはできない。",
+                author: "ガンジー"
+            }
+        ];
+
+        // 2. HTMLの要素を取得
+        const getBtn = document.getElementById('get-btn');
+        const quoteText = document.getElementById('quote-text');
+        const quoteAuthor = document.getElementById('quote-author');
+
+        // 3. ボタンが押された時の処理
+        getBtn.addEventListener('click', function() {
+            // 配列からランダムに1つ選ぶ
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const selectedQuote = quotes[randomIndex];
+
+            // 画面のテキストを書き換える
+            quoteText.textContent = `"${selectedQuote.text}"`;
+            quoteAuthor.textContent = `— ${selectedQuote.author}`;
+            quoteAuthor.classList.remove('hidden'); // 著者名を表示
+        });
+    </script>
+</body>
 </html>
